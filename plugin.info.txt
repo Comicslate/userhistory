@@ -1,0 +1,7 @@
+base   userhistory
+author Ondra Zara, Rainbow-Spike
+email  o.z.fw@seznam.cz, rainbow_spike@derpy.ru
+date   2019-07-07
+name   User History Manager Plugin
+desc   View page changelog per user
+url    http://www.dokuwiki.org/plugin:userhistory
