@@ -1,2 +1,0 @@
-# userhistory
-Dokuwiki userhistory plugin
