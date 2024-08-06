@@ -73,7 +73,7 @@ class admin_plugin_userhistory extends DokuWiki_Admin_Plugin {
 			$f = file ( $fullname );
 			for ( $j = 0; $j < count ( $f ); $j++ ) { /* for all lines */
 				$line = $f[$j];
-				$change = parseChangelogLine ( $line );
+				$change = dokuwiki\ChangeLog\ChangeLog::parseLogLine ( $line );
 				if ( strtolower ( $change['user'] ) == strtolower ( $user ) ) $changes[] = $change;
 			}
 		}
