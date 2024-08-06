@@ -34,14 +34,14 @@ class admin_plugin_userhistory extends DokuWiki_Admin_Plugin {
 		
         echo ( '<h2 id="'.str_replace ( array ( " ", "'" ), "_", strtolower ( $this->getLang ( 'list' ) ) ).'">'.$this->getLang ( 'list' ).'</h2>' );
 	
-		ptln ( '<div class = "editor_list"><p class = "editor_counter">'.$this->getLang ( 'total' ).': '.count ( $user_list ).'</p><ol>' );
+		echo ( '<div class = "editor_list"><p class = "editor_counter">'.$this->getLang ( 'total' ).': '.count ( $user_list ).'</p><ol>' );
 		foreach ( $user_list as $key => $value ) {
 			$nick = $key;
 			$name = $value['name'];
 			$href = wl ( $ID ). ( strpos ( wl ( $ID ), '?' )?'&amp;':'?' ).'do=admin&amp;page='.$this->getPluginName ( ).'&amp;user='.hsc ( $nick );
-			ptln ( '<li><a href = "'.$href.'">'.$nick.' - '.$name.'</li>' );
+			echo ( '<li><a href = "'.$href.'">'.$nick.' - '.$name.'</li>' );
 		}
-		ptln ( '</ol></div>' );
+		echo ( '</ol></div>' );
 	}	
 	
 	function _getChanges ( $user ) {
@@ -96,36 +96,36 @@ class admin_plugin_userhistory extends DokuWiki_Admin_Plugin {
 		global $lang;
 		
 		$href = wl ( $ID ). ( strpos ( wl ( $ID ), '?' )?'&amp;':'?' ).'do=admin&amp;page='.$this->getPluginName ( );
-		ptln ( '<p><a href = "'.$href.'">['.$this->getLang('back').']</a></p>' );
-		ptln ( '<h2>'.$user.'</h2>' );
+		echo ( '<p><a href = "'.$href.'">['.$this->getLang('back').']</a></p>' );
+		echo ( '<h2>'.$user.'</h2>' );
 		$changes = array_values ( $this->_getChanges ( $user ) );
-		ptln ( '<div class = "edit_list"><p class = "edit_counter">'.$this->getLang ( 'total' ).': '.count ( $changes ).'</p><ol>' );
+		echo ( '<div class = "edit_list"><p class = "edit_counter">'.$this->getLang ( 'total' ).': '.count ( $changes ).'</p><ol>' );
 
 		foreach ( $changes as $key => $change ) {
 			if ( $key == 1000 ) { /* long list limiter */
 				break;
 			};
 			$date = strftime ( $conf['dformat'], $change['date'] );
-			ptln ( $change['type'] === 'e' ? '<li class = "minor">' : '<li>' );
-			ptln ( '<div class = "li"><span class="date">'.$date.'</span>' );
+			echo ( $change['type'] === 'e' ? '<li class = "minor">' : '<li>' );
+			echo ( '<div class = "li"><span class="date">'.$date.'</span>' );
 			$p = array ( );
 			$p['src']    = DOKU_BASE.'lib/images/diff.png';
 			$p['title']  = $lang['diff'];
 			$p['alt']    = $lang['diff'];
 			$att = buildAttributes ( $p );
-			ptln ( '<a class = "diff_link" href = "'.wl ( $change['id'], "do=diff&amp;rev=".$change['date'] ).'"><img '.$att.' /></a>' );
+			echo ( '<a class = "diff_link" href = "'.wl ( $change['id'], "do=diff&amp;rev=".$change['date'] ).'"><img '.$att.' /></a>' );
 			$p['src']    = DOKU_BASE.'lib/images/history.png';
 			$p['title']  = $lang['btn_revs'];
 			$p['alt']    = $lang['btn_revs'];
 			$att = buildAttributes ( $p );
-			ptln ( '<a class = "revisions_link" href = "'.wl ( $change['id'], "do=revisions" ).'"><img '.$att.' /></a> ' );
-			ptln ( $change['id'].' &ndash; '.html_wikilink ( ':'.$change['id'], $conf['useheading'] ? NULL : $change['id'] ) );
+			echo ( '<a class = "revisions_link" href = "'.wl ( $change['id'], "do=revisions" ).'"><img '.$att.' /></a> ' );
+			echo ( $change['id'].' &ndash; '.html_wikilink ( ':'.$change['id'], $conf['useheading'] ? NULL : $change['id'] ) );
 			if ( $change['sum'] != "" ) {
-				ptln ( ' &ndash; '.hsc ( $change['sum'] ) );
+				echo ( ' &ndash; '.hsc ( $change['sum'] ) );
 			};
-			ptln ( '</div></li>' );
+			echo ( '</div></li>' );
 		}
-		ptln ( '</ol></div>' );
+		echo ( '</ol></div>' );
 	}
 
     function html ( ) {
